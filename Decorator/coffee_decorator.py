@@ -17,7 +17,7 @@ class AddOnDecorator(Beverage,metaclass=ABCMeta):
         if isinstance(self.beverage, Beverage):
             return "{} with {}".format(str(self.beverage), self.add_on_name)
 
-class Espresso(Beverage):
+class Espresso(Beverage): #Concrete Beverage Class
     def __init__(self):
         self.coffee_name = 'Espresso'
 
@@ -27,7 +27,7 @@ class Espresso(Beverage):
     def __str__(self):
         return "{} Coffee".format(self.coffee_name)    
 
-class CaramelAddOn(AddOnDecorator):
+class CaramelAddOn(AddOnDecorator): #Concrete AddOn Class
 
     def __init__(self,beverage):
         self.beverage = beverage
@@ -36,11 +36,11 @@ class CaramelAddOn(AddOnDecorator):
     def cost(self):
         return self.beverage.cost() + 1.0
 
-class ChoclateAddOn(AddOnDecorator):
+class ChocolateAddOn(AddOnDecorator): #Concorete AddOn Class
     
     def __init__(self,beverage):
         self.beverage = beverage
-        self.add_on_name = 'Choclate'
+        self.add_on_name = 'Chocolate'
     
     def cost(self):
         return self.beverage.cost() + 1.0 
@@ -49,9 +49,9 @@ if __name__ == '__main__':
     coffees = [
         Espresso(), 
         CaramelAddOn(Espresso()), 
-        ChoclateAddOn(Espresso()), 
-        ChoclateAddOn(CaramelAddOn(Espresso())), 
-        CaramelAddOn(ChoclateAddOn(Espresso()))
+        ChocolateAddOn(Espresso()), 
+        ChocolateAddOn(CaramelAddOn(Espresso())), 
+        CaramelAddOn(ChocolateAddOn(Espresso()))
         ]
     for coffee in coffees:
         print("{} = {}".format(str(coffee),str(coffee.cost())))
